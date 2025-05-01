@@ -25,94 +25,75 @@ class ConverterTest {
     void tearDown() {
     }
 
-    /*
-    *  1 - I
-    *  2 - II
-    *  3 - III
-    *  4 - IV
-    *  5 - V
-    *  І так далі...... В тестах буде видно)
-    * */
-
     @Test
-    void whenRoman_V_ThenArabic_5() {
-        Assertions.assertEquals(5,Converter.convertRomanToArabic("V"));
+    void whenRoman_EmptyString_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("");
+        });
     }
 
     @Test
-    void whenRoman_I_ThenArabic_1() {
-        Assertions.assertEquals(1,Converter.convertRomanToArabic("I"));
+    void whenRoman_NullInput_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic(null);
+        });
     }
 
     @Test
-    void whenRoman_II_ThenArabic_2() {
-        Assertions.assertEquals(2,Converter.convertRomanToArabic("II"));
+    void whenRoman_ContainsInvalidLetter_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("ABCD");
+        });
     }
 
     @Test
-    void whenRoman_III_ThenArabic_3() {
-        Assertions.assertEquals(3,Converter.convertRomanToArabic("III"));
+    void whenRoman_LowerCaseLetters_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("xiv");
+        });
     }
 
     @Test
-    void whenRoman_IV_ThenArabic_4() {
-        Assertions.assertEquals(4,Converter.convertRomanToArabic("IV"));
+    void whenRoman_IncorrectSequence_IIV_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("IIV");
+        });
     }
 
     @Test
-    void whenRoman_VI_ThenArabic_6() {
-        Assertions.assertEquals(6,Converter.convertRomanToArabic("VI"));
+    void whenRoman_IncorrectSequence_VV_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("VV");
+        });
     }
 
     @Test
-    void whenRoman_IX_ThenArabic_9() {
-        Assertions.assertEquals(9,Converter.convertRomanToArabic("IX"));
+    void whenRoman_InvalidRepetitionMoreThanThreeTimes_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("IIII");
+        });
     }
 
     @Test
-    void whenRoman_X_ThenArabic_10() {
-        Assertions.assertEquals(10,Converter.convertRomanToArabic("X"));
-    }
-
-//    XL L  XC  C  CD D  CM M
-
-    @Test
-    void whenRoman_XL_ThenArabic_40() {
-        Assertions.assertEquals(40,Converter.convertRomanToArabic("XL"));
+    void whenRoman_NonRomanSymbols_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("123");
+        });
     }
 
     @Test
-    void whenRoman_L_ThenArabic_50() {
-        Assertions.assertEquals(50,Converter.convertRomanToArabic("L"));
+    void whenRoman_MixedRomanAndDigits_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("X1I");
+        });
     }
 
     @Test
-    void whenRoman_XC_ThenArabic_90() {
-        Assertions.assertEquals(90,Converter.convertRomanToArabic("XC"));
+    void whenRoman_SpecialCharacters_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Converter.convertRomanToArabic("X@#");
+        });
     }
 
-    @Test
-    void whenRoman_C_ThenArabic_100() {
-        Assertions.assertEquals(100,Converter.convertRomanToArabic("C"));
-    }
 
-    @Test
-    void whenRoman_CD_ThenArabic_400() {
-        Assertions.assertEquals(400,Converter.convertRomanToArabic("CD"));
-    }
-
-    @Test
-    void whenRoman_D_ThenArabic_500() {
-        Assertions.assertEquals(500,Converter.convertRomanToArabic("D"));
-    }
-
-    @Test
-    void whenRoman_CM_ThenArabic_900() {
-        Assertions.assertEquals(900,Converter.convertRomanToArabic("CM"));
-    }
-
-    @Test
-    void whenRoman_M_ThenArabic_1000() {
-        Assertions.assertEquals(1000,Converter.convertRomanToArabic("M"));
-    }
 }

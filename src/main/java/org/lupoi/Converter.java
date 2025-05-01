@@ -11,6 +11,11 @@ import java.util.List;
 public class Converter {
 
     public static int convertRomanToArabic(String roman) {
+        if (roman == null || roman.isEmpty() ||
+                !roman.matches("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")) {
+            throw new IllegalArgumentException("Invalid Roman numeral input: " + roman);
+        }
+
         String romanNumeral = roman.toUpperCase();
         int result = 0;
 
